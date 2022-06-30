@@ -3,5 +3,11 @@
 Deposit
 {% endblock %}
 {% block content %}
-<h1>Deposit</h1>
+<form action="{{url_for('deposit')}}" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Deposit Amount</label>
+        <input type="text" name="deposit" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 {% endblock %}

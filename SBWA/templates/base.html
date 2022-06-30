@@ -19,7 +19,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Account Info</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url_for('withdrawal')}}">Withdraw</a>
+                <a class="nav-link" href="{{url_for('withdraw')}}">Withdraw</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('deposit')}}">Deposit</a>
@@ -31,6 +31,17 @@
           </div>
         </div>
       </nav>
+      {% with messages = get_flashed_messages(with_categories=true) %} 
+      {% if messages %} 
+          {% for category, message in messages %} 
+              {% if category =='error' %}
+              <center>
+                  <small style="color: red;">{{ message }}</small>
+              </center>
+              {% endif %}    
+          {% endfor %} 
+      {% endif %} 
+    {% endwith %}
     <div class="container">
         {% block content %}
         {% endblock %}
