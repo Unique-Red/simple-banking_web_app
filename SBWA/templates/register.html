@@ -6,7 +6,7 @@ Register
 <form action="{{url_for('register')}}" method="post">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Enter your full name</label>
-        <input type="text" name="accountName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="text" name="accountName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="This name will be used as your account name">
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -14,7 +14,7 @@ Register
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Enter initial deposit</label>
-        <input type="number" name="initial_deposit" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="number" name="initial_deposit" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 100">
       </div>
     <button type="submit" class="btn btn-primary">Create Account</button>
   </form>
