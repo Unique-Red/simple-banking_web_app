@@ -15,10 +15,6 @@ import random
 users = {}
 print(users)
 
-@app.route("/")
-def home():
-    return render_template("home.html")
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     global user
@@ -33,7 +29,7 @@ def login():
             print (user.show_details())
 
             flash("Login successful")
-            return redirect(url_for("home"))
+            return redirect(url_for("deposit"))
         elif users[str(accountNumber)] != accountPassword:
             flash("Incorrect credentials", category="error")
         else:
@@ -67,16 +63,10 @@ def register():
             flash("User created.")
             print(users)
             print(user.show_details())
-            return  "This is your account number: {}. Save it somewhere as you will subsequently use it to login. Now go to '/login'".format(accountNumber)
+            return "This is your account number: {}. Save it somewhere as you will subsequently use it to login. Now go to <a>'/login'</a>".format(accountNumber)
             # return redirect(url_for("login"))
     else:
         return render_template("register.html")
-
-
-@app.route("/account_number", methods=["GET", "POST"])
-def account_number():
-    accountName = Bank(accountName)
-    return render_template("account.html", accountName=accountName)
 
 
 @app.route("/deposit", methods=["GET", "POST"])
@@ -94,3 +84,18 @@ def withdraw():
         user.withdraw(amount)
         print(user.show_details())
     return render_template("withdrawal.html")
+
+
+
+
+# @app.route("/account_info/{accountNumber}")
+# def home():
+#     user = user.show_details()
+#     #return render_template("home.html", user=user)
+#     return user
+
+
+# @app.route("/account_number", methods=["GET", "POST"])
+# def account_number():
+#     accountName = Bank(accountName)
+#     return render_template("account.html", accountName=accountName)
