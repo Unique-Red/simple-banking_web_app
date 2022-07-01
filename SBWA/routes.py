@@ -3,6 +3,7 @@ from flask.globals import request
 from SBWA import app
 from .models import Bank
 from werkzeug.security import generate_password_hash, check_password_hash
+import random
 
 # GET \account_info\{accountNumber}
 # GET \account_statement\{accountNumber}
@@ -16,23 +17,25 @@ print(users)
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", users=users)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     global user
     if request.method == "POST":
-        accountName = request.form["accountName"]
+        accountNumber = request.form["accountNumber"]
         accountPassword = request.form["accountPassword"]
 
-        if accountName in users and users[accountName] == accountPassword:
-            session["user"] = accountName
+        if str(accountNumber) in users and users[str(accountNumber)] == accountPassword:
+            session["user"] = str(accountNumber)
 
-            user = Bank(session["user"])
-            print (user.show_details())
+            # user = Bank(session["user", str(accountNumber)])
+            # print (user.show_details())
 
             flash("Login successful")
             return redirect(url_for("home"))
+        elif users[str(accountNumber)] != accountPassword:
+            flash("Incorrect credentials", category="error")
         else:
             flash("Account doesn't exist", category="error")
             return render_template("login.html")
@@ -40,21 +43,35 @@ def login():
 
     return render_template("login.html")
 
+
 @app.route("/create_account", methods=["GET", "POST"])
 def register():
+    global users
     if request.method == "POST":
-        email = request.form.get("email")
         accountName = request.form.get("accountName")
+        initial_deposit = request.form.get("initial_deposit")
+        accountPassword = request.form.get("accountPassword")
+        accountNumber = random.randint(1000000000, 9999999999)
+        # red = Bank(accountName, random.randint(1000000000, 9999999999))
+
+        
 
         if accountName in users:
-            flash("Account name already in use")
-            return render_template("register.html", category="error")
+            flash("Account name already in use", category="error")
+            return render_template("register.html")
+        elif int(initial_deposit) < 500:
+            flash("Initial deposit should be minimum #500:00", category="error")
+            return render_template("register.html")
+
         else:
             accountPassword = request.form["accountPassword"]
-            users[accountName] = accountPassword
-            flash("User created")
+            users[str(accountNumber)] = accountPassword
+            red = Bank(accountName, accountNumber)
+            red.initial_deposit(initial_deposit)
+            flash("User created.")
             print(users)
-            return redirect(url_for("login"))
+            print(red.show_details())
+            return  "This is your account number: {}. Save it somewhere as you will subsequently use it to login. Now go to '/login'".format(accountNumber) #redirect(url_fo("login"))
     else:
         return render_template("register.html")
 

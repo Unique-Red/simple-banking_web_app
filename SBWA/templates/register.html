@@ -5,17 +5,17 @@ Register
 {% block content %}
 <form action="{{url_for('register')}}" method="post">
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Enter your full name</label>
         <input type="text" name="accountName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
       </div>
-        <div class="mb-3">
+      <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" name="accountPassword" class="form-control" id="exampleInputPassword1">
-        </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Enter initial deposit</label>
+        <input type="number" name="initial_deposit" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+    <button type="submit" class="btn btn-primary">Create Account</button>
   </form>
 {% endblock %}
