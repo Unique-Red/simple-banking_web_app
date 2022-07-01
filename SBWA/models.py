@@ -31,9 +31,17 @@ class Bank(User):
 
     def deposit(self, amount):
         self.amount = int(amount)
-        self.balance = self.balance + self.amount
+        if self.amount > 1000000:
+            return "You cannot deposit more than one million naira at a time"
+        elif 100 > self.amount:
+            return "You cannot deposit less than 100 naira at a time"
 
-        return "Account balance is now #" + str(self.balance)
+        elif (self.balance + self.amount) > 1000000:
+            return "Account cannot take more one million naira"
+            
+        else:
+            self.balance = self.balance + self.amount
+            return "Account balance is now #" + str(self.balance)
 
     def withdraw(self, amount):
         self.amount = int(amount)
@@ -48,8 +56,12 @@ class Bank(User):
         return self.show_details()
 
 # red = Bank("redx", random.randint(1000000000, 9999999999))
+# red = Bank("redx", 3783008667)
 # print(red.show_details())
-# print(red.initial_deposit(500))
+# # print(red.initial_deposit(500))
+# # print(red.show_details())
+# print(red.deposit(1000))
 # print(red.show_details())
-# print(red.deposit(100))
-# print(red.withdraw(10000))
+# print(red.deposit(99999))
+# print(red.show_details())
+# # print(red.withdraw(10000))

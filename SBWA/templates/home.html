@@ -13,11 +13,11 @@ Home
       </tr>
     </thead>
     <tbody>
-        {% for user in users%}
+        {% for key, value in users() %}
       <tr>
         <th scope="row">{{loop.index}}</th>
         <td>{{user.accountName}}</td>
-        <td>{{user.accountName}}</td>
+        <td>{{value}}</td>
         <td>{{user.accountName}}</td>
       </tr>
       {% endfor %}

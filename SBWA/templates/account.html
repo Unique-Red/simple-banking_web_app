@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+Acccount Number
+{% endblock %}
+{% block content %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Account name: {{accountName}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Account number: {{accountNumber}}</h6>
+      <p class="card-text">Save your account number in a safe place as you will subsequently use it to login. Now go to '/login'</p>
+      <a href="{{url_for('login')}}" class="card-link">Login</a>
+    </div>
+</div>
+{% endblock %}
+
